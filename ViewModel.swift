@@ -23,7 +23,7 @@ class ViewModel: ObservableObject {
                     promise(.success(nil))
                     return
                 }
-                self.weatherByDate[date] = (zip, temp)
+                self.weatherByDate[date] = (zip, self.convertKtoF(k: temp))
                 promise(.success(temp))
             }
         }
@@ -49,5 +49,9 @@ class ViewModel: ObservableObject {
                 completion(nil, "Invalid date")
             }
         }
+    }
+    
+    func convertKtoF(k: Double) -> Double {
+        return ((k - 273.15) * 9 / 5 + 32)
     }
 }
